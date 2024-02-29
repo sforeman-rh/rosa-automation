@@ -3,6 +3,8 @@ kind: TriggerTemplate
 metadata: 
   name: python-sample
   namespace: python-sample
+  labels:
+    app: python-sample
 spec: 
   params: 
     - name: gitrevision 
@@ -29,15 +31,14 @@ spec:
           - name: TLSVERIFY
             value: 'false'
           - name: working-dir
-            value: applications/python-sample
-        serviceAccountName: pipeline
+            value: /
         pipelineRef: 
           name: python-sample
         workspaces:
-        - name: git-creds
+        - name: basic-auth
           secret:
             secretName: github-creds
-        - name: shared-data
+        - name: shared-workspace
           persistentvolumeclaim:
             claimName: python-sample
 
