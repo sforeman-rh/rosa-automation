@@ -2,5 +2,5 @@ apiVersion: project.openshift.io/v1
 kind: Project
 metadata:
   labels:
-    kubernetes.io/metadata.name: python-sample
+    app: python-sample
   name: python-sample
