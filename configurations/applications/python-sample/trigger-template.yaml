@@ -1,0 +1,43 @@
+apiVersion: triggers.tekton.dev/v1alpha1 
+kind: TriggerTemplate 
+metadata: 
+  name: python-sample
+  namespace: python-sample
+spec: 
+  params: 
+    - name: gitrevision 
+    - name: gitrepositoryurl
+  resourcetemplates: 
+    - apiVersion: tekton.dev/v1beta1 
+      kind: PipelineRun 
+      metadata:
+        generateName: python-sample-
+        app: python-sample
+      spec:
+        params:
+          - name: WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND
+            value: 'true'
+          - name: deployment-name
+            value: python-sample
+          - name: git-url
+            value: $(tt.params.gitrepositoryurl)
+          - name: git-revision
+            value: $(tt.params.gitrevision)
+          - name: IMAGE
+            value: >-
+              image-registry.openshift-image-registry.svc:5000/python-sample/python-sample:latest
+          - name: TLSVERIFY
+            value: 'false'
+          - name: working-dir
+            value: applications/python-sample
+        serviceAccountName: pipeline
+        pipelineRef: 
+          name: python-sample
+        workspaces:
+        - name: git-creds
+          secret:
+            secretName: github-creds
+        - name: shared-data
+          persistentvolumeclaim:
+            claimName: python-sample
+
