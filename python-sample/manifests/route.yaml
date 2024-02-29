@@ -6,7 +6,6 @@ metadata:
   name: python-sample
   namespace: python-sample
 spec:
-  host: python-sample-python-sample.apps.demo-hub.tx6d.p1.openshiftapps.com
   port:
     targetPort: 8080-tcp
   tls:
