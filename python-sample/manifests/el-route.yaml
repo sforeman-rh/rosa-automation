@@ -5,6 +5,7 @@ metadata:
     app: python-sample
     eventlistener: python-sample
   name: el-python-sample
+  namespace: python-sample
 spec:
   port:
     targetPort: http-listener
