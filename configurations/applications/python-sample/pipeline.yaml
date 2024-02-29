@@ -23,7 +23,7 @@ spec:
         image-registry.openshift-image-registry.svc:5000/python-sample/python-sample
       name: IMAGE_NAME
       type: string
-    - default: applications/python-sample
+    - default: python-sample
       name: PATH_CONTEXT
       type: string
   tasks:
