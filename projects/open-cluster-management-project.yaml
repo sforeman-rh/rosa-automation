@@ -1,0 +1,6 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: open-cluster-management
