@@ -1,2 +1,3 @@
 /secrets
 /python-sample/manifests/github-creds-secret.yaml
+/gitops/github-connection-secret.yaml
