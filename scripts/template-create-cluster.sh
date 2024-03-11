@@ -25,6 +25,9 @@ export TF_VAR_rosa_openshift_version_short=""
 # worker nodes - defaults to 2
 export TF_VAR_worker_node_replicas=""
 
+# set environment - defaults to production
+export TF_VAR_ocm_environment=""
+
 cd terraform
 terraform init
 terraform plan

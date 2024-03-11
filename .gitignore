@@ -10,5 +10,5 @@
 /terraform-cluster
 /terraform-old
 .DS_Store
-create-cluster.sh
-destroy-cluster.sh
+/scripts/create-cluster.sh
+/scripts/destroy-cluster.sh
