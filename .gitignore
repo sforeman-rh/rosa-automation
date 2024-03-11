@@ -1,3 +1,14 @@
 /secrets
 /python-sample/manifests/github-creds-secret.yaml
 /gitops/github-connection-secret.yaml
+/quay/config-secret.yaml
+/terraform/.terraform
+/terraform/.terraform.lock.hcl
+/terraform/.terraform.tfstate.lock.info
+/terraform/terraform.tfstate
+/terraform/terraform.tfstate.backup
+/terraform-cluster
+/terraform-old
+.DS_Store
+create-cluster.sh
+destroy-cluster.sh
