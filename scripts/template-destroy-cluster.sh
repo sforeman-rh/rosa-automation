@@ -3,7 +3,7 @@
 # required to set
 
 # name of cluster to destroy
-export TF_VAR_cluster_name=""
+export TF_VAR_cluster_name=
 
 
 cd terraform

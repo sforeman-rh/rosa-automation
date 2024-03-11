@@ -3,30 +3,25 @@
 # required to set
 
 # ocm token
-export TF_VAR_ocm_token=""
+export TF_VAR_ocm_token=
 
 # name of cluster to provision
-export TF_VAR_cluster_name=""
+export TF_VAR_cluster_name=
 
 
-# recommended to set
+# Uncomment to set AWS region (default is us-east-1)
+# export TF_VAR_aws_region=
 
-# AWS region - defaults to us-east-1
-export TF_VAR_aws_region=""
-
-# OCP version - defaults to 4.15.0 & 4.15
-# take off z version for version_short e.g. 
+# Uncomment to set OCP version (default is 4.15.0)
 # TF_VAR_rosa_openshift-version=4.15.0 & TF_VAR_rosa_openshift_version_short=4.15
-export TF_VAR_rosa_openshift_version=""
-export TF_VAR_rosa_openshift_version_short=""
+# export TF_VAR_rosa_openshift_version=
+# export TF_VAR_rosa_openshift_version_short=
 
+# Uncomment to set worker nodes (default is 2)
+# export TF_VAR_worker_node_replicas=
 
-# optional settings
-# worker nodes - defaults to 2
-export TF_VAR_worker_node_replicas=""
-
-# set environment - defaults to production
-export TF_VAR_ocm_environment=""
+# Uncomment to set environment (default is production)
+# export TF_VAR_ocm_environment=
 
 cd terraform
 terraform init
