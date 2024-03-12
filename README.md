@@ -25,6 +25,7 @@ Steps:
 Known bugs / future enhancements:
 
 - Need to further test cluster destroy
+- Automate S3 bucket for quay
 - First CICD deployment may fail from deployment timeout
 - Enable console plugins programatically?
 - Include more options when creating cluster / simplifying variables
@@ -34,6 +35,6 @@ Known bugs / future enhancements:
 - Include ACM
 - Connect python-sample with argoCD
 - Enable further monitoring
-- Automate post-install tasks
+- Automate post-install tasks (including creating admin user)
 - Switch scripts to Ansible?
 
