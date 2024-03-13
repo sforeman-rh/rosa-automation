@@ -6,6 +6,7 @@ metadata:
   name: python-sample
   namespace: python-sample
 spec:
+  paused: true
   replicas: 1
   selector:
     matchLabels:
