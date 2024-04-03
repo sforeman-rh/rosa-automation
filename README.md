@@ -1,7 +1,7 @@
 # rosa-automation
 
 Steps:
-1. Ensure rosa, git, oc,terraform, and ocm are installed
+1. Ensure rosa, git, oc, aws, terraform, and ocm are installed
 	scripts/verify-prerequisites.sh
 
 2. Duplicate the following files:
