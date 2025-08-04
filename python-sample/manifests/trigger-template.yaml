@@ -1,29 +1,26 @@
-apiVersion: triggers.tekton.dev/v1alpha1 
-kind: TriggerTemplate 
-metadata: 
-  name: python-sample
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: python-sample-triggertemplate
   namespace: python-sample
-  labels:
-    app: python-sample
-spec: 
-  params: 
-    - name: gitrevision 
+spec:
+  params:
+    - name: gitrevision
     - name: gitrepositoryurl
-  resourcetemplates: 
-    - apiVersion: tekton.dev/v1beta1 
-      kind: PipelineRun 
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
       metadata:
         generateName: python-sample-
-        app: python-sample
       spec:
         params:
           - name: WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND
             value: 'true'
-          - name: deployment-name
+          - name: DEPLOYMENT_NAME
             value: python-sample
-          - name: git-url
+          - name: GIT_URL
             value: $(tt.params.gitrepositoryurl)
-          - name: git-revision
+          - name: GIT_REVISION
             value: $(tt.params.gitrevision)
           - name: IMAGE
             value: >-
@@ -32,13 +29,11 @@ spec:
             value: 'false'
           - name: working-dir
             value: /
-        pipelineRef: 
-          name: python-sample
+        pipelineRef:
+          name: python-sample-pipeline
         workspaces:
-        - name: basic-auth
-          secret:
-            secretName: github-creds
-        - name: shared-workspace
-          persistentvolumeclaim:
-            claimName: python-sample
-
+          - name: basic-auth
+            secret:
+              secretName: github-creds
+          - name: workspace
+            emptyDir: {}
