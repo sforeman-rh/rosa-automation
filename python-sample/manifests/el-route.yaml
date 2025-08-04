@@ -1,16 +1,18 @@
-apiVersion: route.openshift.io/v1
 kind: Route
+apiVersion: route.openshift.io/v1
 metadata:
-  labels:
-    app: python-sample
-    eventlistener: python-sample
-  name: el-python-sample
+  name: python-sample-route
   namespace: python-sample
+  labels:
+    eventlistener: el-python-sample
 spec:
+  host: el-python-sample-python-sample.apps.cluster-7vk2v.dynamic.redhatworkshops.io
+  to:
+    kind: Service
+    name: el-python-sample
+    weight: 100
   port:
     targetPort: http-listener
   tls:
     termination: edge
-  to:
-    kind: Service
-    name: el-python-sample
+  wildcardPolicy: None
