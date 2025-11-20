@@ -1,17 +1,16 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
-  labels:
-    app: python-sample
-  name: python-sample
+  name: python-sample-pipeline
   namespace: python-sample
 spec:
   params:
     - default: 'false'
       name: WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND
       type: string
-    - default: python-sample
-      name: APP_NAME
+    - default: >-
+        image-registry.openshift-image-registry.svc:5000/python-sample/python-sample
+      name: IMAGE_NAME
       type: string
     - default: 'https://github.com/sforeman-rh/rosa-automation'
       name: GIT_REPO
@@ -19,9 +18,8 @@ spec:
     - default: main
       name: GIT_REVISION
       type: string
-    - default: >-
-        image-registry.openshift-image-registry.svc:5000/python-sample/python-sample
-      name: IMAGE_NAME
+    - default: python-sample
+      name: APP_NAME
       type: string
     - default: python-sample
       name: PATH_CONTEXT
@@ -29,45 +27,61 @@ spec:
   tasks:
     - name: fetch-repository
       params:
-        - name: url
+        - name: URL
           value: $(params.GIT_REPO)
-        - name: revision
+        - name: REVISION
           value: $(params.GIT_REVISION)
-        - name: deleteExisting
+        - name: SUBDIRECTORY
+          value: ''
+        - name: DELETE_EXISTING
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: output
-          workspace: shared-workspace
-        - name: basic-auth
-          workspace: basic-auth
+          workspace: workspace
     - name: build
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'false'
-        - name: CONTEXT
-          value: $(params.PATH_CONTEXT)
       runAfter:
         - fetch-repository
       taskRef:
-        kind: ClusterTask
-        name: buildah
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
       workspaces:
         - name: source
-          workspace: shared-workspace
+          workspace: workspace
     - name: deploy
       params:
         - name: SCRIPT
-          value: oc rollout status deploy/$(params.APP_NAME)
+          value: |
+            oc new-app --docker-image $(params.IMAGE_NAME)
       runAfter:
         - build
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
   workspaces:
-    - name: shared-workspace
-    - name: basic-auth
+    - name: workspace

@@ -5,9 +5,9 @@ metadata:
   namespace: python-sample
 spec:
   triggers:
-    - name: python-sample
+    - name: python-sample-triggerbinding
       bindings:
-        - ref: python-sample
+        - ref: python-sample-triggerbinding
           kind: TriggerBinding
       template:
-        ref: python-sample
+        ref: python-sample-triggertemplateN
