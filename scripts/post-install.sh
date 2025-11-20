@@ -3,9 +3,9 @@
 # note - some objects are dependent on others. script may need to be run multiple times
 
 INIT_PROJECTS=true
-INSTALL_ACM=true
+INSTALL_ACM=false
 INSTALL_GITOPS=true
-INSTALL_LOGGING=true
+INSTALL_LOGGING=false
 INSTALL_PIPELINES=true
 INSTALL_SAMPLE=true
 INSTALL_QUAY=true
