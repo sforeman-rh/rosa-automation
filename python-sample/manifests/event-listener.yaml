@@ -10,4 +10,4 @@ spec:
         - ref: python-sample-triggerbinding
           kind: TriggerBinding
       template:
-        ref: python-sample-triggertemplateN
+        ref: python-sample-triggertemplate
